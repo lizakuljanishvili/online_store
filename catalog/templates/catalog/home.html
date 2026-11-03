@@ -5,6 +5,8 @@
 
 <h1>Our Products</h1>
 
+{% include 'catalog/search_filters.html' %}
+
 {% if user.is_authenticated %}
     <a href="{% url 'product_add' %}" class="button">
         + Add Product

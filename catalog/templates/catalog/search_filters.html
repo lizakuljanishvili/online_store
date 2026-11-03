@@ -1,0 +1,127 @@
+
+<form method="GET" class="product-card"
+      style="margin-bottom: 25px;">
+
+    <h2>Search & Filter Products</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+
+        <div>
+            <label>Search</label>
+            <input
+                type="text"
+                name="q"
+                placeholder="Search products..."
+                value="{{ request.GET.q|default:'' }}"
+            >
+        </div>
+
+        {% if show_category_filter %}
+            <div>
+                <label>Category</label>
+
+                <select name="category">
+                    <option value="">All categories</option>
+
+                    {% for category in categories %}
+                        <option
+                            value="{{ category.pk }}"
+                            {% if request.GET.category == category.pk|stringformat:"s" %}selected{% endif %}
+                        >
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        {% endif %}
+
+        {% if show_sale_filter %}
+            <div>
+                <label>Discount</label>
+
+                <select name="sale">
+                    <option value="">All products</option>
+
+                    <option value="yes"
+                        {% if request.GET.sale == 'yes' %}selected{% endif %}>
+                        On Sale
+                    </option>
+
+                    <option value="no"
+                        {% if request.GET.sale == 'no' %}selected{% endif %}>
+                        Not on Sale
+                    </option>
+                </select>
+            </div>
+        {% endif %}
+
+        <div>
+            <label>Minimum Price</label>
+
+            <input
+                type="number"
+                name="min_price"
+                min="0"
+                step="0.01"
+                value="{{ request.GET.min_price|default:'' }}"
+                placeholder="Min price"
+            >
+        </div>
+
+        <div>
+            <label>Maximum Price</label>
+
+            <input
+                type="number"
+                name="max_price"
+                min="0"
+                step="0.01"
+                value="{{ request.GET.max_price|default:'' }}"
+                placeholder="Max price"
+            >
+        </div>
+
+        <div>
+            <label>Sort By</label>
+
+            <select name="sort">
+
+                <option value="price_asc"
+                    {% if not request.GET.sort or request.GET.sort == 'price_asc' %}selected{% endif %}>
+                    Price: Low to High
+                </option>
+
+                <option value="price_desc"
+                    {% if request.GET.sort == 'price_desc' %}selected{% endif %}>
+                    Price: High to Low
+                </option>
+
+                <option value="name_asc"
+                    {% if request.GET.sort == 'name_asc' %}selected{% endif %}>
+                    Name: A-Z
+                </option>
+
+                <option value="newest"
+                    {% if request.GET.sort == 'newest' %}selected{% endif %}>
+                    Newest First
+                </option>
+
+            </select>
+        </div>
+
+    </div>
+
+    <div style="margin-top: 20px;">
+
+        <button type="submit" class="button">
+            Apply
+        </button>
+
+        <a href="{{ request.path }}" class="button">
+            Clear Filters
+        </a>
+
+    </div>
+
+</form>

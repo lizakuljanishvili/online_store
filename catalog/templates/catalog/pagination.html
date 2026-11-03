@@ -1,13 +1,14 @@
-
 {% if is_paginated %}
 
 <div class="pagination">
 
     {% if page_obj.has_previous %}
 
-        <a href="?page=1">First</a>
+        <a href="?q={{ request.GET.q|urlencode }}&category={{ request.GET.category|urlencode }}&sale={{ request.GET.sale|urlencode }}&min_price={{ request.GET.min_price|urlencode }}&max_price={{ request.GET.max_price|urlencode }}&sort={{ request.GET.sort|urlencode }}&page=1">
+            First
+        </a>
 
-        <a href="?page={{ page_obj.previous_page_number }}">
+        <a href="?q={{ request.GET.q|urlencode }}&category={{ request.GET.category|urlencode }}&sale={{ request.GET.sale|urlencode }}&min_price={{ request.GET.min_price|urlencode }}&max_price={{ request.GET.max_price|urlencode }}&sort={{ request.GET.sort|urlencode }}&page={{ page_obj.previous_page_number }}">
             Previous
         </a>
 
@@ -20,11 +21,11 @@
 
     {% if page_obj.has_next %}
 
-        <a href="?page={{ page_obj.next_page_number }}">
+        <a href="?q={{ request.GET.q|urlencode }}&category={{ request.GET.category|urlencode }}&sale={{ request.GET.sale|urlencode }}&min_price={{ request.GET.min_price|urlencode }}&max_price={{ request.GET.max_price|urlencode }}&sort={{ request.GET.sort|urlencode }}&page={{ page_obj.next_page_number }}">
             Next
         </a>
 
-        <a href="?page={{ page_obj.paginator.num_pages }}">
+        <a href="?q={{ request.GET.q|urlencode }}&category={{ request.GET.category|urlencode }}&sale={{ request.GET.sale|urlencode }}&min_price={{ request.GET.min_price|urlencode }}&max_price={{ request.GET.max_price|urlencode }}&sort={{ request.GET.sort|urlencode }}&page={{ page_obj.paginator.num_pages }}">
             Last
         </a>
 
