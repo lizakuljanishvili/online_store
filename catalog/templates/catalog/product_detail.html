@@ -1,0 +1,49 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="product-card">
+
+    <h1>{{ product.name }}</h1>
+
+    <p>{{ product.description }}</p>
+
+    <p>
+        <strong>Price:</strong>
+        ${{ product.price }}
+    </p>
+
+    <p>
+        <strong>Category:</strong>
+        <a href="{% url 'category_products' product.category.pk %}">
+            {{ product.category.name }}
+        </a>
+    </p>
+
+    {% if product.is_on_sale %}
+        <span class="sale">SALE</span>
+    {% endif %}
+
+    <p>
+        <strong>Availability:</strong>
+
+        {% if product.is_available %}
+            <span style="color: green;">Available</span>
+        {% else %}
+            <span style="color: red;">Not available</span>
+        {% endif %}
+    </p>
+
+    <p>
+        <strong>Added:</strong>
+        {{ product.created_at|date:"d.m.Y" }}
+    </p>
+
+    <a href="{% url 'home' %}" class="button">
+        Back to Home
+    </a>
+
+</div>
+
+{% endblock %}

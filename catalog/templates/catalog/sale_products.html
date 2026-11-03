@@ -1,0 +1,45 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<h1>SALE Products</h1>
+
+<p>Check out our discounted products!</p>
+
+<div class="product-grid">
+
+    {% for product in products %}
+
+        <div class="product-card">
+
+            <h3>
+                <a href="{% url 'product_detail' product.pk %}">
+                    {{ product.name }}
+                </a>
+            </h3>
+
+            <p>{{ product.description|truncatewords:12 }}</p>
+
+            <p class="price">${{ product.price }}</p>
+
+            <span class="sale">SALE</span>
+
+            <a class="button"
+               href="{% url 'product_detail' product.pk %}">
+                View Details
+            </a>
+
+        </div>
+
+    {% empty %}
+
+        <p>No discounted products available.</p>
+
+    {% endfor %}
+
+</div>
+
+<a href="{% url 'home' %}" class="button">Back to Home</a>
+
+{% endblock %}

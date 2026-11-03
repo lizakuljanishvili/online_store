@@ -1,0 +1,49 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<h1>{{ category.name }}</h1>
+
+<p>{{ category.description }}</p>
+
+<h2>Products in this category</h2>
+
+<div class="product-grid">
+
+    {% for product in products %}
+
+        <div class="product-card">
+
+            <h3>
+                <a href="{% url 'product_detail' product.pk %}">
+                    {{ product.name }}
+                </a>
+            </h3>
+
+            <p>{{ product.description|truncatewords:12 }}</p>
+
+            <p class="price">${{ product.price }}</p>
+
+            {% if product.is_on_sale %}
+                <span class="sale">SALE</span>
+            {% endif %}
+
+            <a class="button"
+               href="{% url 'product_detail' product.pk %}">
+                View Details
+            </a>
+
+        </div>
+
+    {% empty %}
+
+        <p>No products in this category.</p>
+
+    {% endfor %}
+
+</div>
+
+<a href="{% url 'home' %}" class="button">Back to Home</a>
+
+{% endblock %}
