@@ -1,0 +1,34 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="product-card" style="max-width: 500px; margin: auto;">
+
+    <h1>Delete Product</h1>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ product.name }}</strong>?
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button type="submit"
+                class="button"
+                style="background-color: #e63946;">
+            Yes, Delete
+        </button>
+
+        <a href="{% url 'product_detail' product.pk %}"
+           class="button">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

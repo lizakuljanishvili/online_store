@@ -1,0 +1,38 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="product-card" style="max-width: 600px; margin: auto;">
+
+    {% if product %}
+        <h1>Update Product</h1>
+    {% else %}
+        <h1>Add New Product</h1>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="button">
+            Save Product
+        </button>
+
+    </form>
+
+    {% if product %}
+        <a href="{% url 'product_detail' product.pk %}" class="button">
+            Cancel
+        </a>
+    {% else %}
+        <a href="{% url 'home' %}" class="button">
+            Cancel
+        </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

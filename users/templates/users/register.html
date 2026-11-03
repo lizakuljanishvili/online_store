@@ -1,0 +1,29 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="product-card" style="max-width: 500px; margin: auto;">
+
+    <h1>Create Account</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="button">
+            Register
+        </button>
+
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="{% url 'login' %}">Login here</a>
+    </p>
+
+</div>
+
+{% endblock %}
