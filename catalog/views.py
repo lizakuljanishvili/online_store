@@ -13,6 +13,7 @@ class HomeView(ListView):
     model = Product
     template_name = 'catalog/home.html'
     context_object_name = 'products'
+    paginate_by = 6
 
     def get_queryset(self):
         return Product.objects.filter(
@@ -33,6 +34,7 @@ class CategoryProductsView(ListView):
     model = Product
     template_name = 'catalog/category_products.html'
     context_object_name = 'products'
+    paginate_by = 6
 
     def get_queryset(self):
         self.category = get_object_or_404(
@@ -55,6 +57,7 @@ class SaleProductsView(ListView):
     model = Product
     template_name = 'catalog/sale_products.html'
     context_object_name = 'products'
+    paginate_by = 6
 
     def get_queryset(self):
         return Product.objects.filter(
